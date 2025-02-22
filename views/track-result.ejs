@@ -1118,149 +1118,213 @@
                             }
                         </style>
 
+<div id="wpcargo-history-section"
+     class="wpcargo-history-details print-section wpcargo-table-responsive table-responsive"
+     style="margin-top: 20px;">
+    <p class="header-title"><strong>Shipment History</strong></p>
 
-                        <div id="wpcargo-history-section"
-                            class="wpcargo-history-details print-section wpcargo-table-responsive table-responsive"
-                            style="margin-top: 20px;">
-                            <p class="header-title"><strong>Shipment History</strong></p>
+    <table id="shipment-history" class="table wpcargo-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Updated By</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
 
-                            <table id="shipment-history" class="table wpcargo-table">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Location</th>
-                                        <th>Status</th>
-                                        <th>Updated By</th>
-                                        <th>Remarks</th>
-                                    </tr>
-                                </thead>
+        <tbody>
+            <% fetchedHistory.forEach(function(entry) { %>
+                <tr class="history-row">
+                    <td class="history-data date">
+                        <%= entry.date %>
+                    </td>
+                    <td class="history-data time">
+                        <%= entry.time %>
+                    </td>
+                    <td class="history-data location">
+                        <%= entry.location %>
+                    </td>
+                    <td class="history-data status">
+                        <%= entry.status %>
+                    </td>
+                    <td class="history-data updated-name">
+                        <%= entry.updatedBy.toUpperCase() %>
+                    </td>
+                    <td class="history-data remarks">
+                        <%= entry.remarks %>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
 
-                                <tbody>
-                                    <% fetchedHistory.forEach(function(entry) { %>
-                                        <tr class="history-row">
-                                            <td class="history-data date">
-                                                <%= entry.date %>
-                                            </td>
-                                            <td class="history-data time">
-                                                <%= entry.time %>
-                                            </td>
-                                            <td class="history-data location">
-                                                <%= entry.location %>
-                                            </td>
-                                            <td class="history-data status">
-                                                <%= entry.status %>
-                                            </td>
-                                            <td class="history-data updated-name">
-                                                <%= entry.updatedBy.toUpperCase() %>
-                                            </td>
-                                            <td class="history-data remarks">
-                                                <%= entry.remarks %>
-                                            </td>
-                                        </tr>
-                                        <% }); %>
-                                </tbody>
-                            </table>
-                        </div>
+<!-- Add your custom CSS below -->
+<style>
+    /* General styling */
+    #wpcargo-history-section {
+        margin-top: 20px;
+    }
 
-                        <!-- Add your custom CSS below -->
-                        <style>
-                            /* General styling */
-                            #wpcargo-history-section {
-                                margin-top: 20px;
-                            }
+    .header-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+    }
 
-                            .header-title {
-                                font-size: 1.5rem;
-                                font-weight: bold;
-                                margin-bottom: 15px;
-                                color: #333;
-                            }
+    table.wpcargo-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 14px;
+        color: #555;
+    }
 
-                            table.wpcargo-table {
-                                width: 100%;
-                                border-collapse: collapse;
-                                margin: 20px 0;
-                                font-size: 14px;
-                                color: #555;
-                            }
+    table.wpcargo-table thead {
+        background-color: #f4f4f4;
+        color: #333;
+        font-weight: bold;
+    }
 
-                            table.wpcargo-table thead {
-                                background-color: #f4f4f4;
-                                color: #333;
-                                font-weight: bold;
-                            }
+    table.wpcargo-table th,
+    table.wpcargo-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        word-wrap: break-word;  /* Allow text to wrap in each cell */
+        white-space: normal;    /* Prevent text from overflowing */
+    }
 
-                            table.wpcargo-table th,
-                            table.wpcargo-table td {
-                                padding: 12px;
-                                text-align: left;
-                                border-bottom: 1px solid #ddd;
-                            }
+    table.wpcargo-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
 
-                            table.wpcargo-table tr:nth-child(even) {
-                                background-color: #f9f9f9;
-                            }
+    table.wpcargo-table tr:hover {
+        background-color: #f1f1f1;
+    }
 
-                            table.wpcargo-table tr:hover {
-                                background-color: #f1f1f1;
-                            }
+    /* Responsive Styles */
+    @media only screen and (max-width: 1200px) {
+        /* Adjustments for large tablets */
+        table.wpcargo-table th,
+        table.wpcargo-table td {
+            font-size: 16px;
+            padding: 10px;
+        }
+    }
 
-                            /* Responsive Styles */
-                            @media only screen and (max-width: 768px) {
-                                table.wpcargo-table thead {
-                                    display: none;
-                                    /* Hide header on small screens */
-                                }
+    @media only screen and (max-width: 992px) {
+        /* Adjustments for tablets */
+        table.wpcargo-table th,
+        table.wpcargo-table td {
+            font-size: 14px;
+            padding: 8px;
+        }
 
-                                table.wpcargo-table tr {
-                                    display: block;
-                                    margin-bottom: 10px;
-                                }
+        table.wpcargo-table {
+            font-size: 12px;
+        }
+    }
 
-                                table.wpcargo-table td {
-                                    display: block;
-                                    text-align: right;
-                                    font-size: 14px;
-                                    position: relative;
-                                    padding-left: 50%;
-                                    white-space: nowrap;
-                                }
+    @media only screen and (max-width: 768px) {
+        table.wpcargo-table thead {
+            display: none;
+            /* Hide header on small screens */
+        }
 
-                                table.wpcargo-table td:before {
-                                    content: attr(data-label);
-                                    position: absolute;
-                                    left: 10px;
-                                    top: 12px;
-                                    font-weight: bold;
-                                    font-size: 14px;
-                                }
+        table.wpcargo-table tr {
+            display: block;
+            margin-bottom: 15px;
+        }
 
-                                table.wpcargo-table td:nth-of-type(1):before {
-                                    content: "Date:";
-                                }
+        table.wpcargo-table td {
+            display: block;
+            text-align: right;
+            font-size: 14px;
+            position: relative;
+            border-bottom: 1px solid #ddd;
+            overflow: hidden; /* Prevent overflow of content */
+            word-wrap: break-word; /* Ensure wrapping for long text */
 
-                                table.wpcargo-table td:nth-of-type(2):before {
-                                    content: "Time:";
-                                }
 
-                                table.wpcargo-table td:nth-of-type(3):before {
-                                    content: "Location:";
-                                }
+            padding: 12px;
+        white-space: normal; 
+        padding-left: 20%;
+        }
 
-                                table.wpcargo-table td:nth-of-type(4):before {
-                                    content: "Status:";
-                                }
+        table.wpcargo-table td:before {
+            content: attr(data-label);
+            position: absolute;
+            left: 10px;
+            top: 12px;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
-                                table.wpcargo-table td:nth-of-type(5):before {
-                                    content: "Updated By:";
-                                }
+        table.wpcargo-table td:nth-of-type(1):before {
+            content: "Date:";
+        }
 
-                                table.wpcargo-table td:nth-of-type(6):before {
-                                    content: "Remarks:";
-                                }
-                            }
-                        </style>
+        table.wpcargo-table td:nth-of-type(2):before {
+            content: "Time:";
+        }
+
+        table.wpcargo-table td:nth-of-type(3):before {
+            content: "Location:";
+        }
+
+        table.wpcargo-table td:nth-of-type(4):before {
+            content: "Status:";
+        }
+
+        table.wpcargo-table td:nth-of-type(5):before {
+            content: "Updated By:";
+        }
+
+        table.wpcargo-table td:nth-of-type(6):before {
+            content: "Remarks:";
+        }
+
+        /* Enable scroll for Remarks field */
+        .history-data.remarks {
+            max-height: 100px;  /* Set a max height for the remarks cell */
+            overflow-y: auto;  /* Add vertical scroll */
+            word-wrap: break-word;  /* Ensure text breaks */
+        }
+
+        /* Ensure the table can scroll horizontally on small screens */
+        #wpcargo-history-section {
+            overflow-x: auto;
+        }
+    }
+
+    @media only screen and (max-width: 480px) {
+        /* Adjustments for mobile */
+        table.wpcargo-table td {
+            font-size: 12px;
+        }
+
+        table.wpcargo-table td:before {
+            font-size: 12px;
+        }
+
+        .header-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        /* Add horizontal scrolling if table overflows */
+        #wpcargo-history-section {
+            overflow-x: auto;
+        }
+    }
+</style>
+
+
 
 
                     </div>
