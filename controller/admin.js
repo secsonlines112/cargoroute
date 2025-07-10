@@ -1,11 +1,11 @@
-const express = require("express")
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken")
 const { generateAcessToken, shipmentMessage } = require('../utils/utils')
-const { Admin, Cosignment, User, History } = require("../database/databaseConfig");
+const { Admin, Cossignment} = require("../database/databaseConfig");
 const { validationResult } = require("express-validator");
 const random_number = require('random-number')
-const Mailjet = require('node-mailjet')
+const { Resend } = require('resend');
+const resend = new Resend(process.env.RESEND);
 
 
 
@@ -502,42 +502,29 @@ module.exports.updateCosignment = async (req, res, next) => {
 
 module.exports.sendEmail = async (req, res, next) => {
    try {
+      console.log('route reached')
 
       let { email, message } = req.body
       // Create mailjet send email
-      const mailjet = Mailjet.apiConnect(process.env.MAILJET_APIKEY, process.env.MAILJET_SECRETKEY
-      )
 
-      //kargoofreight@kargoofreight.cloud
-
-      //kargoofreight@kargoofreight.cloud
-
-      const request = await mailjet.post("send", { 'version': 'v3.1' })
-         .request({
-            "Messages": [
-               {
-                  "From": {
-                     "Email": "kargoofreight@kargoofreight.cloud",
-                     "Name": "kargoofreight.cloud"
-                  },
-                  "To": [
-                     {
-                        "Email": `${email}`,
-                        "Name": `${email}`
-                     }
-                  ],
-                  "Subject": "SHIPPMENT ARRIVAL",
-                  "TextPart": ``,
-                  "HTMLPart": shipmentMessage(message)
-               }
-            ]
-         })
+      console.log(req.body)
 
 
-      if (!request) {
-         let error = new Error("could not verify.Try later")
-         return next(error)
-      }
+         const response = await resend.emails.send({
+            from:'cargoroute@cargoroute.site',
+            to: email,
+            subject: "SHIPPMENT ARRIVAL",
+            html:shipmentMessage(message),
+         });
+         //capitalfundflex.com
+
+         console.log(response)
+   
+         if (!response) {
+            const error = new Error("Please use a valid email");
+            console.log(error)
+            return next(error);
+         }
 
 
       return res.status(200).json({
@@ -545,10 +532,13 @@ module.exports.sendEmail = async (req, res, next) => {
       })
 
    } catch (error) {
+      console.log(error)
       error.message = error.message || "an error occured try later"
       return next(error)
    }
 }
+
+
 
 
 module.exports.getHistories = async (req, res, next) => {
