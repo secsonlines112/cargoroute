@@ -1,4 +1,7 @@
-
+const express = require("express")
+const Mailjet = require('node-mailjet')
+let request = require('request');
+const random_number = require("random-number")
 
 const { Cosignment, History } = require("../database/databaseConfig");
 
@@ -7,15 +10,8 @@ module.exports.gethome = async (req, res, next) => {
    res.status(200).render('index')
 }
 
-
-Cosignment.find().then(data=>{
-   console.log(data)
-})
-
 module.exports.trackResult = async (req, res, next) => {
    const { keyword } = req.body
-
-   console.log(req.body)
 
    let trackingData = await Cosignment.findOne({ carrier_reference_no: keyword })
    if (!trackingData) {
