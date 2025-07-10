@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken")
 const { generateAcessToken, shipmentMessage } = require('../utils/utils')
-const { Admin, Cossignment} = require("../database/databaseConfig");
+const { Admin, Cosignment} = require("../database/databaseConfig");
 const { validationResult } = require("express-validator");
 const random_number = require('random-number')
 const { Resend } = require('resend');
